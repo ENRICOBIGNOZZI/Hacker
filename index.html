@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test Server</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        max-width: 720px;
+        margin: 48px auto;
+        padding: 0 16px;
+      }
+      code {
+        background: #f2f2f2;
+        padding: 2px 6px;
+        border-radius: 6px;
+      }
+      button {
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: white;
+        cursor: pointer;
+      }
+      button:active {
+        transform: translateY(1px);
+      }
+      pre {
+        background: #0b1020;
+        color: #d6e2ff;
+        padding: 12px;
+        border-radius: 12px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test Server</h1>
+    <p>
+      Questa pagina serve solo a verificare che <code>/</code> e
+      <code>/event</code> funzionino.
+    </p>
+
+    <button id="btn">Invia evento</button>
+    <pre id="out">Pronto.</pre>
+
+    <script>
+      const out = document.getElementById("out");
+      const btn = document.getElementById("btn");
+
+      async function sendEvent(event) {
+        const res = await fetch("/event", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ event, ts: Date.now() }),
+        });
+        const text = await res.text();
+        out.textContent = `HTTP ${res.status}\\n${text}`;
+      }
+
+      btn.addEventListener("click", () => sendEvent("button_click"));
+      sendEvent("page_view").catch((e) => (out.textContent = String(e)));
+    </script>
+  </body>
+</html>
