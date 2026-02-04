@@ -301,6 +301,55 @@
         display: none;
       }
 
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 12, 10, 0.72);
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 160ms ease;
+        z-index: 50;
+        padding: 18px;
+      }
+
+      .overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .overlay-card {
+        width: min(920px, 100%);
+        background: #fff7ea;
+        border-radius: 16px;
+        border: 1px solid rgba(123, 15, 26, 0.25);
+        box-shadow: 0 18px 60px rgba(10, 6, 4, 0.35);
+        padding: 18px;
+        position: relative;
+      }
+
+      .overlay-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+      }
+
+      .overlay-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: 1px solid rgba(123, 15, 26, 0.35);
+        background: #fff4e6;
+        color: var(--red-dark);
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: "Cinzel", serif;
+      }
+
       @media (max-width: 860px) {
         .grid {
           grid-template-columns: 1fr;
@@ -373,11 +422,22 @@
       </div>
     </div>
 
+    <div class="overlay" id="successOverlay" aria-hidden="true">
+      <div class="overlay-card" role="dialog" aria-label="Schermata">
+        <button class="overlay-close" type="button" id="closeOverlay">
+          Chiudi
+        </button>
+        <img src="success.png" alt="Schermata" />
+      </div>
+    </div>
+
     <script>
       const msg = document.getElementById("msg");
       const togglePw = document.getElementById("togglePw");
       const username = document.getElementById("username");
       const password = document.getElementById("password");
+      const overlay = document.getElementById("successOverlay");
+      const closeOverlay = document.getElementById("closeOverlay");
 
       function setMsg(text) {
         msg.textContent = text;
@@ -410,15 +470,18 @@
 
       document.getElementById("loginForm").addEventListener("submit", (e) => {
         e.preventDefault();
-        setMsg(
-          "Demo: nessun login reale. Non vengono inviati username/password."
-        );
+        setMsg("");
+        overlay.classList.add("show");
         const hasUser = !!username.value.trim();
         const hasPass = !!password.value;
         sendEvent("login_attempt", { hasUser, hasPass }).catch(() => {});
       });
 
       sendEvent("page_view").catch(() => {});
+
+      closeOverlay.addEventListener("click", () => {
+        overlay.classList.remove("show");
+      });
     </script>
   </body>
 </html>

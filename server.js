@@ -13,6 +13,8 @@ process.on("unhandledRejection", (err) => {
 
 const app = express();
 app.use(express.json());
+// Serve static assets like images and CSS
+app.use(express.static(__dirname));
 
 // serve index.html esplicitamente su /
 app.get("/", (req, res) => {
