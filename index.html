@@ -138,11 +138,13 @@
         box-shadow: 0 12px 30px rgba(90, 10, 18, 0.35);
       }
 
-      .seal span {
-        font-family: "Cinzel", serif;
-        font-size: 12px;
-        letter-spacing: 1px;
-        color: #f7e7cc;
+      .seal img {
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        object-fit: contain;
+        padding: 6px;
+        background: rgba(255, 255, 255, 0.82);
       }
 
       .grid {
@@ -275,7 +277,7 @@
       .mini {
         margin-top: 14px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         gap: 12px;
         font-size: 12px;
@@ -316,9 +318,10 @@
         <header>
           <div class="title">
             <h1>Portale di Accesso</h1>
-            <p>Stile classico, rosso istituzionale</p>
           </div>
-          <div class="seal" aria-hidden="true"><span>LOGO</span></div>
+          <div class="seal" aria-hidden="true">
+            <img src="stemma.png" alt="" />
+          </div>
         </header>
 
         <main class="grid">
@@ -330,7 +333,6 @@
 
           <section class="panel" aria-label="Accesso">
             <h3>Accedi</h3>
-            <p>Usa le credenziali del tuo sistema interno.</p>
 
             <form id="loginForm" autocomplete="off">
               <label>
@@ -340,7 +342,6 @@
                     id="username"
                     name="username"
                     type="text"
-                    placeholder="es. nome.cognome"
                   />
                 </div>
               </label>
@@ -352,7 +353,6 @@
                     id="password"
                     name="password"
                     type="password"
-                    placeholder="••••••••"
                   />
                   <button class="ghost" type="button" id="togglePw">
                     Mostra
@@ -364,7 +364,6 @@
             </form>
 
             <div class="mini">
-              <span id="status">Stato: pronto</span>
               <a href="#" id="helpLink">Assistenza</a>
             </div>
 
@@ -375,7 +374,6 @@
     </div>
 
     <script>
-      const status = document.getElementById("status");
       const msg = document.getElementById("msg");
       const togglePw = document.getElementById("togglePw");
       const username = document.getElementById("username");
@@ -393,7 +391,7 @@
           // Never send credentials; only anonymous signals.
           body: JSON.stringify({ event, ts: Date.now(), ...extra }),
         });
-        status.textContent = `Stato: evento "${event}" (HTTP ${res.status})`;
+        void res;
       }
 
       togglePw.addEventListener("click", () => {
