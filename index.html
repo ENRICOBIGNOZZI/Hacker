@@ -163,20 +163,9 @@
             rgba(123, 15, 26, 0.08),
             transparent 60%
           );
-      }
-
-      .intro h2 {
-        margin: 0 0 10px;
-        font-family: "Cinzel", serif;
-        font-size: 18px;
-        color: var(--red-dark);
-      }
-
-      .intro p {
-        margin: 0 0 18px;
-        font-size: 15px;
-        color: var(--muted);
-        line-height: 1.5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .crest {
@@ -184,21 +173,13 @@
         border-radius: 16px;
         padding: 18px;
         background: rgba(255, 255, 255, 0.58);
+        width: min(360px, 100%);
       }
 
       .crest svg {
         width: 100%;
         height: auto;
         display: block;
-      }
-
-      .note {
-        margin-top: 16px;
-        padding: 10px 12px;
-        border-left: 3px solid var(--red);
-        background: rgba(123, 15, 26, 0.06);
-        font-size: 13px;
-        color: var(--muted);
       }
 
       .panel {
@@ -338,12 +319,7 @@
         </header>
 
         <main class="grid">
-          <section class="intro">
-            <h2>Benvenuto</h2>
-            <p>
-              Questa e una pagina pubblica di accesso in stile classico. Il
-              logo e un segnaposto temporaneo.
-            </p>
+          <section class="intro" aria-label="Immagine">
             <div class="crest" aria-label="Immagine placeholder">
               <svg viewBox="0 0 640 260" role="img" aria-label="Placeholder">
                 <rect
@@ -366,10 +342,6 @@
                   <rect x="34" y="94" width="260" height="10" rx="5" />
                 </g>
               </svg>
-            </div>
-            <div class="note">
-              Demo: non inserire credenziali reali. Questa pagina non invia
-              username o password al server.
             </div>
           </section>
 
@@ -469,4 +441,3 @@
     </script>
   </body>
 </html>
-
