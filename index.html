@@ -174,12 +174,15 @@
         padding: 18px;
         background: rgba(255, 255, 255, 0.58);
         width: min(360px, 100%);
+        display: grid;
+        place-items: center;
       }
 
-      .crest svg {
+      .crest img {
         width: 100%;
         height: auto;
         display: block;
+        object-fit: contain;
       }
 
       .panel {
@@ -321,27 +324,7 @@
         <main class="grid">
           <section class="intro" aria-label="Immagine">
             <div class="crest" aria-label="Immagine placeholder">
-              <svg viewBox="0 0 640 260" role="img" aria-label="Placeholder">
-                <rect
-                  x="0"
-                  y="0"
-                  width="640"
-                  height="260"
-                  rx="14"
-                  fill="rgba(123,15,26,0.08)"
-                />
-                <path
-                  d="M0 190 C120 150, 210 220, 330 180 C450 150, 540 205, 640 160 L640 260 L0 260 Z"
-                  fill="rgba(123,15,26,0.25)"
-                />
-                <circle cx="520" cy="70" r="34" fill="rgba(123,15,26,0.35)" />
-                <circle cx="520" cy="70" r="16" fill="rgba(255,255,255,0.35)" />
-                <g opacity="0.8" fill="rgba(59,43,32,0.6)">
-                  <rect x="34" y="46" width="220" height="10" rx="5" />
-                  <rect x="34" y="70" width="300" height="10" rx="5" />
-                  <rect x="34" y="94" width="260" height="10" rx="5" />
-                </g>
-              </svg>
+              <img src="stemma.png" alt="Stemma" />
             </div>
           </section>
 
